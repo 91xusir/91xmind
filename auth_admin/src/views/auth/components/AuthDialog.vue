@@ -19,7 +19,8 @@ const formModel = ref({
   deviceCode: '',
   tokenCode: '',
   expiryTime: 0,
-  isBanned: 0
+  isBanned: 0,
+  extra_info: ''
 })
 // 表单验证规则
 const rules = {

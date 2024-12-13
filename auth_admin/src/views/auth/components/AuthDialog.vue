@@ -90,6 +90,9 @@ defineExpose({
       <el-form-item label="是否封禁" prop="isBanned">
         <el-switch :active-value="1" :inactive-value="0" v-model="formModel.isBanned" />
       </el-form-item>
+      <el-form-item label="备注" prop="extra_info">
+        <el-input v-model="formModel.extra_info" placeholder="请输入备注"></el-input>
+      </el-form-item>
     </el-form>
     <template #footer>
       <span class="dialog-footer">

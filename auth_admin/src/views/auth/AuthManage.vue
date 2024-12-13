@@ -149,6 +149,7 @@ const onPageChange = async () => {
         prop="expiryTime"
         :formatter="(row) => formatTime(row.expiryTime)"
       />
+      <el-table-column label="备注" prop="extra_info" />
       <el-table-column label="使用状态" prop="isBanned">
         <template #default="scope">
           <span :class="['status', scope.row.isBanned ? 'banned' : 'normal']">

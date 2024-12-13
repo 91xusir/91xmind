@@ -3,7 +3,7 @@ import { Context } from "hono";
 // 获取指定的激活码
 export const authAdd = async (c: Context) => {
   try {
-    let { deviceCode, tokenCode, expiryTime, isBanned } = await c.req.json();
+    let { deviceCode, tokenCode, expiryTime, isBanned, extra_info } = await c.req.json();
     isBanned = isBanned ? isBanned : 0;
     const a = await c.env.DB.prepare(
       "SELECT * FROM tb_auth WHERE deviceCode = ?"
@@ -26,9 +26,9 @@ export const authAdd = async (c: Context) => {
     const usedTime = new Date().getTime();
 
     await c.env.DB.prepare(
-      "INSERT INTO tb_auth (deviceCode, tokenCode,usedTime,expiryTime,isBanned) VALUES (?1, ?2,?3, ?4,?5)"
+      "INSERT INTO tb_auth (deviceCode, tokenCode,usedTime,expiryTime,isBanned,extra_info) VALUES (?1, ?2,?3, ?4,?5,?6)"
     )
-      .bind(deviceCode, tokenCode, usedTime, expiryTime, isBanned)
+      .bind(deviceCode, tokenCode, usedTime, expiryTime, isBanned, extra_info)
       .run();
 
     return c.json({

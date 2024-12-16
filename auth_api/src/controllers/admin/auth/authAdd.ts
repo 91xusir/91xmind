@@ -5,15 +5,12 @@ export const authAdd = async (c: Context) => {
   try {
     let { deviceCode, tokenCode, expiryTime, isBanned, extra_info } = await c.req.json();
     isBanned = isBanned ? isBanned : 0;
-    const a = await c.env.DB.prepare(
-      "SELECT * FROM tb_auth WHERE deviceCode = ?"
-    )
+    extra_info = extra_info ? extra_info : "";
+    const a = await c.env.DB.prepare("SELECT * FROM tb_auth WHERE deviceCode = ?")
       .bind(deviceCode)
       .first();
 
-    const b = await c.env.DB.prepare(
-      "SELECT * FROM tb_auth WHERE tokenCode = ?"
-    )
+    const b = await c.env.DB.prepare("SELECT * FROM tb_auth WHERE tokenCode = ?")
       .bind(tokenCode)
       .first();
 

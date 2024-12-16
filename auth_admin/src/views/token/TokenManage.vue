@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { Delete, Edit, Notebook } from '@element-plus/icons-vue'
+import { Delete, Edit, CopyDocument, Notebook } from '@element-plus/icons-vue'
 import { tokenPageListService, tokenDeleteService, tokenQuaryListService } from '@/api/token.js'
 import TokenLogsDialog from './components/TokenLogsDialog.vue'
 import BatchEditDialog from './components/BatchEditDialog.vue'
@@ -66,6 +66,16 @@ const onPageChange = async () => {
     tableLoading.value = false
   }, 300)
 }
+
+//复制
+const onCopy = async (row) => {
+  try {
+    await navigator.clipboard.writeText(row.tokenCode);
+    ElMessage.success('复制成功');
+  } catch (error) {
+    ElMessage.error('复制失败，请重试');
+  }
+};
 </script>
 
 <template>
@@ -114,15 +124,24 @@ const onPageChange = async () => {
         prop="days"
         :formatter="(t) => (t.days == -1 ? '永久' : t.days + ' 天')"
       />
-      <el-table-column label="操作" fixed="right" width="200">
+      <el-table-column label="操作" fixed="right" width="280">
         <template #default="scope">
+          <el-button
+            type="primary"
+            size="small"
+            @click="onCopy(scope.row)"
+            plain
+          >
+          <el-icon><CopyDocument /></el-icon>
+            复制授权码
+          </el-button>
           <el-button
             type="primary"
             size="small"
             @click="tokenEditDialog.onOpenEditDialog(scope.row)"
             plain
           >
-            <el-icon><Edit /></el-icon>
+          <el-icon><Edit /></el-icon>
             编辑
           </el-button>
           <el-popconfirm title="确认删除吗?" @confirm="onDelete(scope.row)">

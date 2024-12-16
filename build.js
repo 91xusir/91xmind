@@ -59,7 +59,7 @@ function buildXmindApi() {
   console.log(`cd ${xmindApiPath}`);
   console.log("npx wrangler d1 create d1-xmind");
   console.log(`上面这个命令会生成id,自行替换auth_api\\wrangler.toml的database_id字段`);
-  console.log("npx wrangler d1 execute d1-xmind --file=./src/db/db.sql");
+  console.log("npx wrangler d1 execute d1-xmind --file=./src/db/db.sql --remote");
   console.log("npx wrangler deploy --minify src/index.ts");
   process.exit(0);
 }

@@ -48,3 +48,6 @@ CREATE TABLE IF NOT EXISTS tb_tklog (
     addTime INTEGER,
     tokens TEXT
 );
+
+INSERT INTO tb_admin (username, password, extra_info) 
+VALUES ('admin@', '123456@', '');

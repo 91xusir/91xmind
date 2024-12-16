@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "dev": "wrangler dev src/index.ts",
-    "deploy": "wrangler deploy --minify src/index.ts"
+    "dev": "npx wrangler dev src/index.ts",
+    "deploy": "npx wrangler deploy --minify src/index.ts"
   },
   "dependencies": {
     "@hono/zod-validator": "^0.2.2",

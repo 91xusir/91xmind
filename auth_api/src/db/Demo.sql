@@ -134,4 +134,4 @@ INSERT INTO tb_tklog (addTime, tokens) VALUES
   (1632477600, 'Data entry 10');
 
 INSERT INTO tb_admin (username, password, extra_info) 
-VALUES ('admin@', '123456@', 'Some extra information about this admin');
+VALUES ('admin@', '123456@', '');

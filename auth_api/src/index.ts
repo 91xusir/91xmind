@@ -12,22 +12,14 @@ import {
 } from "./routes";
 import { jwt } from "hono/jwt";
 import type { JwtVariables } from "hono/jwt";
-type Variables = JwtVariables;
 
 type Bindings = {
   Latest_Version: string;
   JWT_SECRET: string;
   JWT_EXP: number;
 };
-const app = new Hono<{ Bindings: Bindings }, { Variables: Variables }>();
+const app = new Hono<{ Bindings: Bindings }, { Variables: JwtVariables }>();
 
-
-// app.use(
-//   '/*',
-//   cors({
-//     origin: 'https://admin.xmind.aifake.xyz',
-//   })
-// )
 app.use('*', cors())
 app.use("/api/v1/*", (c, next) => {
   const jwtMiddleware = jwt({

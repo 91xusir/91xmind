@@ -1,5 +1,5 @@
 //授权验证API
-const baseURL = "https://xmind-api.lfans.cn";
+const baseURL = "https://xmind.aifake.xyz";
 //禁用ssl验证
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = `0`;
 //密钥

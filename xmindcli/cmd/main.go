@@ -37,15 +37,22 @@ func main() {
 		}
 		switch choice {
 		case 1:
-			changeActiveServer()
+			changeActiveServer(false)
 		case 2:
 			restoreActiveServer()
+		case 91:
+			offlineActive()
 		case 3:
 			os.Exit(0)
 		default:
 			fmt.Println("无效选项，请重新选择！")
 		}
 	}
+}
+
+func offlineActive() {
+	changeActiveServer(true)
+
 }
 func asarExtract() {
 	// 获取第一个命令行参数，即拖动到可执行文件的文件路径
@@ -71,8 +78,8 @@ func asarExtract() {
 		return
 	}
 }
-func changeActiveServer() {
-	err := crack.StartPatch()
+func changeActiveServer(isOfflineActive bool) {
+	err := crack.StartPatch(isOfflineActive)
 	if err != nil {
 		fmt.Println(err)
 		return

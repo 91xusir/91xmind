@@ -24,7 +24,7 @@ func main() {
 	}
 	var choice int
 	for {
-		fmt.Println("------Xmind Active------")
+		fmt.Println("------Xmind Offline Active------")
 		fmt.Println("1. 切换")
 		fmt.Println("2. 恢复")
 		fmt.Println("3. 退出")
@@ -37,11 +37,9 @@ func main() {
 		}
 		switch choice {
 		case 1:
-			changeActiveServer(false)
+			changeActiveServer()
 		case 2:
 			restoreActiveServer()
-		case 91:
-			offlineActive()
 		case 3:
 			os.Exit(0)
 		default:
@@ -50,10 +48,6 @@ func main() {
 	}
 }
 
-func offlineActive() {
-	changeActiveServer(true)
-
-}
 func asarExtract() {
 	// 获取第一个命令行参数，即拖动到可执行文件的文件路径
 	fPath := os.Args[1]
@@ -78,8 +72,8 @@ func asarExtract() {
 		return
 	}
 }
-func changeActiveServer(isOfflineActive bool) {
-	err := crack.StartPatch(isOfflineActive)
+func changeActiveServer() {
+	err := crack.StartPatch()
 	if err != nil {
 		fmt.Println(err)
 		return

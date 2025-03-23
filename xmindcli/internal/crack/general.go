@@ -4,8 +4,6 @@ import (
 	"embed"
 	"encoding/json"
 	"errors"
-	"fmt"
-	"io/fs"
 	_ "net/http/pprof"
 	"os"
 	"path/filepath"
@@ -60,31 +58,9 @@ func isFix() bool {
 	return packageJson["main"] == "main/xmind.js"
 }
 
-func StartPatch(isOfflineActive bool) error {
-	if isOfflineActive {
-		// 获取用户主目录
-		userHome, err := os.UserHomeDir()
-		if err != nil {
-			fmt.Printf("获取用户主目录失败: %v\n", err)
-			return err
-		}
-		// 目标文件路径，假设复制到用户主目录下
-		destFilePath := filepath.Join(userHome, "xmindOfflineToken")
-		srcFileContent, err := fs.ReadFile(asset, "asset/xmindOfflineToken")
-		if err != nil {
-			fmt.Printf("读取嵌入文件失败: %v\n", err)
-			return err
-		}
-		// 创建目标文件并写入内容
-		err = os.WriteFile(destFilePath, srcFileContent, 0644)
-		if err != nil {
-			fmt.Printf("写入目标文件失败: %v\n", err)
-			return err
-		}
-
-	}
+func StartPatch() error {
 	if isFix() {
-		return errors.New("xmind has changed")
+		return errors.New("请先恢复后再尝试")
 	}
 	if err := CheckEnv(); err != nil {
 		return err
